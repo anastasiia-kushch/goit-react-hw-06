@@ -1,13 +1,12 @@
-import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js';
 import { useId } from 'react';
+import { addContact } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { addContact } from '../../redux/contactsSlice';
 
 import css from '../ContactForm/ContactForm.module.css';
 
 const initialValues = {
-  id: '',
   name: '',
   number: '',
 };
@@ -18,21 +17,21 @@ const FormSchema = Yup.object().shape({
     .max(50, 'Too Long!')
     .required('Required'),
   number: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
     .required('Required'),
 });
 
 export default function ContactForm() {
   const nameFieldId = useId();
   const numberFieldId = useId();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    addContact({
-      id: nanoid(),
-      name: values.name,
-      number: values.number,
-    });
+    dispatch(
+      addContact({
+        name: values.name,
+        number: values.number,
+      })
+    );
     actions.resetForm();
   };
 
@@ -61,7 +60,6 @@ export default function ContactForm() {
           type="tel"
           name="number"
           id={numberFieldId}
-          pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
           placeholder="000-00-00"
           className={css.input}
         ></Field>
