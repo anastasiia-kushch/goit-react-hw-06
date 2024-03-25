@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from '../SearchBox/SearchBox.module.css';
 import { selectNameFilter, setFilter } from '../../redux/filtersSlice';
 
-export default function Searchbox() {
+export default function SearchBox() {
   const dispatch = useDispatch();
   const { value } = useSelector(selectNameFilter);
   const habdleChange = (e) => {

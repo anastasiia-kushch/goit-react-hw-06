@@ -1,5 +1,5 @@
 import ContactForm from '../ContactForm/ContactForm';
-import Searchbox from '../SearchBox/SearchBox';
+import SearchBox from '../SearchBox/SearchBox';
 import ContactList from '../ContactList/ContactList';
 import css from '../App/App.module.css';
 
@@ -8,7 +8,7 @@ function App() {
     <div className={css.div}>
       <h1>Phonebook</h1>
       <ContactForm />
-      <Searchbox />
+      <SearchBox />
       <ContactList />
     </div>
   );
